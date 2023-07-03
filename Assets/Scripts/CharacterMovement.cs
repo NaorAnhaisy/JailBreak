@@ -72,13 +72,11 @@ public class CharacterMovement : MonoBehaviour
 
         if (!wasWalking && input.magnitude > 0.1f)
         {
-            Debug.Log("walk");
             wasWalking = true;
             animator.SetBool("isWalking", true);
         }
         else if (wasWalking && input.magnitude <= 0.1f)
         {
-            Debug.Log("not walk");
             wasWalking = false;
             animator.SetBool("isWalking", false);
         }
