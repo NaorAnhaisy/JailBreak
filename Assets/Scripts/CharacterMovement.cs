@@ -6,7 +6,9 @@ public class CharacterMovement : MonoBehaviour
 {
     CharacterController controller;
     public Animator animator;
-    public Transform cameraTransform;
+    public Transform camera1Transform;
+    public Transform camera2Transform;
+    private Transform activeCameraTransform;
     public float playerSpeed = 5;
 
     public float mouseSensivity = 3;
@@ -37,6 +39,10 @@ public class CharacterMovement : MonoBehaviour
                 transform.position = hit.point;
             }
         }
+
+        activeCameraTransform = camera1Transform;
+        camera1Transform.gameObject.SetActive(true);
+        camera2Transform.gameObject.SetActive(false);
     }
 
     void Update()
@@ -44,6 +50,7 @@ public class CharacterMovement : MonoBehaviour
         UpdateLook();
         UpdateMovement();
         UpdateGravity();
+        UpdateActiveCamera();
     }
 
     void UpdateLook()
@@ -51,7 +58,7 @@ public class CharacterMovement : MonoBehaviour
         look.x += Input.GetAxis("Mouse X") * mouseSensivity;
         look.y += Input.GetAxis("Mouse Y") * mouseSensivity;
         look.y = Mathf.Clamp(look.y, -90, 90);
-        cameraTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
+        activeCameraTransform.localRotation = Quaternion.Euler(-look.y, 0, 0);
         transform.localRotation = Quaternion.Euler(0, look.x, 0);
     }
 
@@ -91,6 +98,26 @@ public class CharacterMovement : MonoBehaviour
         if (controller.isGrounded && velocity.y < 0f)
         {
             velocity.y = -1f;
+        }
+    }
+
+    void UpdateActiveCamera()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // Switch the active camera
+            if (activeCameraTransform == camera1Transform)
+            {
+                camera1Transform.gameObject.SetActive(false);
+                camera2Transform.gameObject.SetActive(true);
+                activeCameraTransform = camera2Transform;
+            }
+            else
+            {
+                camera1Transform.gameObject.SetActive(true);
+                camera2Transform.gameObject.SetActive(false);
+                activeCameraTransform = camera1Transform;
+            }
         }
     }
 }
