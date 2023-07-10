@@ -11,4 +11,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameMission1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/StartMission2.unity
+    guid: ba8e3e22d7ba3124aa48612948044c29
+  - enabled: 1
+    path: Assets/Scenes/GameMission2.unity
+    guid: d2a4e835018d59d4b92c0974af0e5916
+  - enabled: 1
+    path: Assets/Scenes/StartMission3.unity
+    guid: 808c3c6d3965e1f4fac45d53b237cf54
+  - enabled: 1
+    path: Assets/Scenes/GameMission3.unity
+    guid: ffa1f9ee396b6d543a469b5be223be64
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 6cccd496e8939ca449c11856305b47d6
   m_configObjects: {}

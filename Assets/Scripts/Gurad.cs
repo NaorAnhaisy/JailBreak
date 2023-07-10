@@ -7,6 +7,7 @@ public class Gurad : MonoBehaviour
     public static event System.Action OnGuradHasSpottedPlayer;
     public LifeBarController lifeBarController;
 
+    public bool isPrisoner = false;
     public float speed = 5;
     public float waitTime = .3f;
     public float turnSpeed = 90;
@@ -103,7 +104,13 @@ public class Gurad : MonoBehaviour
 
     void RemovePointsFromLife()
     {
-        lifeBarController.UpdateLife(-30);
+        if (isPrisoner)
+        {
+            lifeBarController.UpdateLife(-20);
+        } else
+        {
+            lifeBarController.UpdateLife(-30);
+        }
         OnGuradHasSpottedPlayer?.Invoke();
     }
 

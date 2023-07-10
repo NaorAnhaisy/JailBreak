@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LifeBarController : MonoBehaviour
@@ -24,5 +25,10 @@ public class LifeBarController : MonoBehaviour
 
         // Change the color based on remaining life
         fillImage.color = Color.Lerp(emptyColor, fullColor, life / 100f);
+
+        if (life == 0)
+        {
+            SceneManager.LoadScene(6);
+        }
     }
 }

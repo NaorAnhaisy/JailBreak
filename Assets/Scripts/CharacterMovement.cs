@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -18,6 +19,43 @@ public class CharacterMovement : MonoBehaviour
     Vector3 velocity;
     float mass = 1f;
     public float jumpSpeed = 5f;
+
+    public AudioClip keyCollectSound;
+    private bool hasCollectedKeys = false;
+    public float delayBeforeSceneLoad = 1f;
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Key"))
+        {
+            CollectKey(other.gameObject);
+        }
+    }
+
+    private void CollectKey(GameObject key)
+    {
+        // Play the key collection sound
+        AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
+
+        // Remove the key from the scene
+        Destroy(key);
+
+        // Set the flag indicating that keys have been collected
+        hasCollectedKeys = true;
+
+        // Start a coroutine to delay before loading the scene
+        StartCoroutine(LoadSceneWithDelay());
+    }
+
+    private System.Collections.IEnumerator LoadSceneWithDelay()
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delayBeforeSceneLoad);
+
+        // Load the scene after the delay
+        SceneManager.LoadScene(2);
+    }
 
     private void Awake()
     {

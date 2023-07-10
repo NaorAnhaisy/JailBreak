@@ -5,12 +5,12 @@ public class TimerScript : MonoBehaviour
 {
     public float totalTime = 120f; // Total time in seconds
 
-    private Text timerText;
+    public Text timerText;
     private float currentTime;
+    public LifeBarController lifeBarController;
 
     private void Start()
     {
-        timerText = GetComponent<Text>();
         currentTime = totalTime;
     }
 
@@ -21,7 +21,7 @@ public class TimerScript : MonoBehaviour
         if (currentTime <= 0f)
         {
             currentTime = 0f;
-            // Timer has reached zero, handle the event here
+            lifeBarController.UpdateLife(-100);
         }
 
         UpdateTimerDisplay();
