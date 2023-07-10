@@ -1,4 +1,6 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
@@ -8,6 +10,7 @@ public class TimerScript : MonoBehaviour
     public Text timerText;
     private float currentTime;
     public LifeBarController lifeBarController;
+    public int failedMissionScene;
 
     private void Start()
     {
@@ -16,24 +19,31 @@ public class TimerScript : MonoBehaviour
 
     private void Update()
     {
-        currentTime -= Time.deltaTime;
-
-        if (currentTime <= 0f)
+        try
         {
-            currentTime = 0f;
-            lifeBarController.UpdateLife(-100);
-        }
+            currentTime -= Time.deltaTime;
 
-        UpdateTimerDisplay();
+            if (currentTime <= 0f)
+            {
+                Debug.Log("Game over");
+                SceneManager.LoadScene(failedMissionScene);
+            } else
+            {
+                UpdateTimerDisplay();
+            }
+        } catch { }
     }
 
     private void UpdateTimerDisplay()
     {
-        int minutes = Mathf.FloorToInt(currentTime / 60f);
-        int seconds = Mathf.FloorToInt(currentTime % 60f);
+        try
+        {
+            int minutes = Mathf.FloorToInt(currentTime / 60f);
+            int seconds = Mathf.FloorToInt(currentTime % 60f);
 
-        string timerString = string.Format("{0:00}:{1:00}", minutes, seconds);
+            string timerString = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        timerText.text = timerString;
+            timerText.text = timerString;
+        } catch {}
     }
 }
