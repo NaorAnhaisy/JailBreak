@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,7 +22,7 @@ public class CharacterMovement : MonoBehaviour
     public float jumpSpeed = 5f;
 
     public AudioClip keyCollectSound;
-    private bool hasCollectedKeys = false;
+    public bool hasCollectedKeys = false;
     public float delayBeforeSceneLoad = 1f;
 
 

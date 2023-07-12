@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3731,8 +3731,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalTime: 120
   timerText: {fileID: 1534736520}
-  lifeBarController: {fileID: 0}
+  fillImage: {fileID: 571412558}
   failedMissionScene: 6
+  fullColor: {r: 0, g: 0, b: 1, a: 1}
+  emptyColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &151326427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52395,7 +52397,7 @@ MonoBehaviour:
   animator: {fileID: 1900556017}
   camera1Transform: {fileID: 963194228}
   camera2Transform: {fileID: 365450978}
-  playerSpeed: 9
+  playerSpeed: 6
   mouseSensivity: 3
   jumpSpeed: 5
   keyCollectSound: {fileID: 8300000, guid: 0fbe214be99f48b4b8d428374287442e, type: 3}
@@ -57248,15 +57250,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 85c5775d75be5dc4396c136e3f6fe201, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47
+      value: 73.6
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 85c5775d75be5dc4396c136e3f6fe201, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 75.745
+      value: 76.874
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 85c5775d75be5dc4396c136e3f6fe201, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.538
+      value: -30.24
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 85c5775d75be5dc4396c136e3f6fe201, type: 3}
       propertyPath: m_LocalRotation.w

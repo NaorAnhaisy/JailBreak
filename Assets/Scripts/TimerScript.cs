@@ -8,9 +8,12 @@ public class TimerScript : MonoBehaviour
     public float totalTime = 120f; // Total time in seconds
 
     public Text timerText;
-    private float currentTime;
-    public LifeBarController lifeBarController;
+    public Image fillImage;
     public int failedMissionScene;
+
+    public Color fullColor = Color.blue;
+    public Color emptyColor = Color.red;
+    private float currentTime;
 
     private void Start()
     {
@@ -25,12 +28,14 @@ public class TimerScript : MonoBehaviour
 
             if (currentTime <= 0f)
             {
-                Debug.Log("Game over");
                 SceneManager.LoadScene(failedMissionScene);
             } else
             {
                 UpdateTimerDisplay();
             }
+
+            // Change the color based on remaining time
+            fillImage.color = Color.Lerp(emptyColor, fullColor, currentTime / totalTime);
         } catch { }
     }
 

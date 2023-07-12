@@ -26,4 +26,23 @@ public class DoorScript : MonoBehaviour
             doorAnimator.Play("DoorClose");
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        CharacterMovement characterMovement = other.GetComponent<CharacterMovement>();
+        if (other.CompareTag("Player") && characterMovement != null && characterMovement.hasCollectedKeys)
+        {
+            doorAnimator.SetBool("isOpen", true);
+            isOpen = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && isOpen)
+        {
+            doorAnimator.SetBool("isOpen", false);
+            isOpen = false;
+        }
+    }
 }
