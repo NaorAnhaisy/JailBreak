@@ -45,6 +45,9 @@ public class CharacterMovement : MonoBehaviour
         // Set the flag indicating that keys have been collected
         hasCollectedKeys = true;
 
+        // Unlock cursor
+        Cursor.lockState = CursorLockMode.None;
+
         // Start a coroutine to delay before loading the scene
         StartCoroutine(LoadSceneWithDelay());
     }

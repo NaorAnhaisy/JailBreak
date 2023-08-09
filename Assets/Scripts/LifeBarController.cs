@@ -28,6 +28,10 @@ public class LifeBarController : MonoBehaviour
 
         if (life == 0)
         {
+            // Unlock cursor
+            Cursor.lockState = CursorLockMode.None;
+
+            // Load failed scene
             SceneManager.LoadScene(6);
         }
     }
