@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gurad : MonoBehaviour
 {
     public static event System.Action OnGuradHasSpottedPlayer;
-    public LifeBarController lifeBarController;
+    private LifeBarManager lifeBarManagerInstance;
 
     public bool isPrisoner = false;
     public float speed = 5;
@@ -30,6 +30,7 @@ public class Gurad : MonoBehaviour
 
     void Start()
     {
+        lifeBarManagerInstance = LifeBarManager.Instance;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         viewAngle = spotlight.spotAngle;
         originalSpotlightColor = spotlight.color;
@@ -106,10 +107,11 @@ public class Gurad : MonoBehaviour
     {
         if (isPrisoner)
         {
-            lifeBarController.UpdateLife(-20);
-        } else
+            lifeBarManagerInstance.UpdateLife(-20);
+        }
+        else
         {
-            lifeBarController.UpdateLife(-30);
+            lifeBarManagerInstance.UpdateLife(-30);
         }
         OnGuradHasSpottedPlayer?.Invoke();
     }

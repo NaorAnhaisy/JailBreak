@@ -57,6 +57,9 @@ public class CharacterMovement : MonoBehaviour
         // Wait for the specified delay
         yield return new WaitForSeconds(delayBeforeSceneLoad);
 
+        // hide life bar
+        LifeBarManager.Instance.gameObject.SetActive(false);
+
         // Load the scene after the delay
         SceneManager.LoadScene(2);
     }

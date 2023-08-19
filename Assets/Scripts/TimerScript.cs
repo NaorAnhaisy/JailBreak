@@ -17,7 +17,18 @@ public class TimerScript : MonoBehaviour
 
     private void Start()
     {
-        currentTime = totalTime;
+        // Check if the current scene is Scene 1
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            // Activate the TimerScript and associated game object
+            gameObject.SetActive(true);
+            currentTime = totalTime;
+        }
+        else
+        {
+            // Deactivate the TimerScript and associated game object in other scenes
+            gameObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -28,6 +39,9 @@ public class TimerScript : MonoBehaviour
 
             if (currentTime <= 0f)
             {
+                // hide life bar
+                LifeBarManager.Instance.gameObject.SetActive(false);
+
                 SceneManager.LoadScene(failedMissionScene);
             } else
             {
