@@ -10,6 +10,7 @@ public class LifeBarManager : MonoBehaviour
     {
         get
         {
+            Debug.Log("Here!!");
             if (instance == null)
             {
                 instance = FindObjectOfType<LifeBarManager>();
@@ -32,6 +33,7 @@ public class LifeBarManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("ehre!!");
         UpdateLife(0); // Initialize the life bar color
     }
 
@@ -53,9 +55,19 @@ public class LifeBarManager : MonoBehaviour
             // hide life bar
             LifeBarManager.Instance.gameObject.SetActive(false);
 
-            // Load failed scene
+            // Save the current scene number
+            int currentSceneNumber = SceneManager.GetActiveScene().buildIndex;
+            PlayerPrefs.SetInt("LastFailedScene", currentSceneNumber);
+
+            // Load the failed scene
             SceneManager.LoadScene(7);
         }
+    }
+
+    public void ResetLife()
+    {
+        life = 0;
+        this.UpdateLife(100);
     }
 
     private void Awake()
@@ -63,7 +75,7 @@ public class LifeBarManager : MonoBehaviour
         // Get the current scene's build index
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if (currentSceneIndex == 0 || currentSceneIndex == 2 || currentSceneIndex == 4 || currentSceneIndex == 6)
+        if (!(currentSceneIndex == 2 || currentSceneIndex == 4 || currentSceneIndex == 6))
         {
             // Deactivate the canvas if the scene is not 0, 2, 4, or 6
             gameObject.SetActive(false);

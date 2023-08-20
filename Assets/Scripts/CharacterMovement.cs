@@ -6,12 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
+    private LifeBarManager lifeBarManagerInstance;
     CharacterController controller;
     public Animator animator;
     public Transform camera1Transform;
     public Transform camera2Transform;
     private Transform activeCameraTransform;
     public float playerSpeed = 5;
+
+    public GameObject explosionPrefab;
+    public float explosionIntensityMultiplier = 1.5f;
 
     public float mouseSensivity = 3;
     Vector2 look;
@@ -22,6 +26,7 @@ public class CharacterMovement : MonoBehaviour
     public float jumpSpeed = 5f;
 
     public AudioClip keyCollectSound;
+    public AudioClip mineSound;
     public bool hasCollectedKeys = false;
     public float delayBeforeSceneLoad = 1f;
 
@@ -32,6 +37,40 @@ public class CharacterMovement : MonoBehaviour
         {
             CollectKey(other.gameObject);
         }
+
+        if (other.CompareTag("Mine"))
+        {
+
+            // Calculate explosion intensity based on the noise value
+            float explosionIntensity = 0.5f * explosionIntensityMultiplier;
+
+            // Play the destroy sound
+            AudioSource.PlayClipAtPoint(mineSound, transform.position);
+
+            // update life
+            lifeBarManagerInstance.UpdateLife(-50);
+
+            // Trigger explosion
+            TriggerExplosion(explosionIntensity);
+
+            // Destroy the mine GameObject
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void TriggerExplosion(float intensity)
+    {
+        // Instantiate the explosion prefab at the player's position
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        // Adjust explosion properties based on intensity
+        ParticleSystem particleSystem = explosion.GetComponent<ParticleSystem>();
+        var mainModule = particleSystem.main;
+        mainModule.startSizeMultiplier *= intensity;
+        mainModule.startSpeedMultiplier *= intensity;
+
+        // Destroy the explosion effect after its duration
+        Destroy(explosion, mainModule.duration);
     }
 
     private void CollectKey(GameObject key)
@@ -61,7 +100,7 @@ public class CharacterMovement : MonoBehaviour
         LifeBarManager.Instance.gameObject.SetActive(false);
 
         // Load the scene after the delay
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 
     private void Awake()
@@ -71,6 +110,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
+        lifeBarManagerInstance = LifeBarManager.Instance;
         Cursor.lockState = CursorLockMode.Locked;
 
         // Check if character is grounded in the start
@@ -120,29 +160,45 @@ public class CharacterMovement : MonoBehaviour
         {
             velocity.y += jumpSpeed;
         }
-        controller.Move((input * playerSpeed + velocity) * Time.deltaTime);
 
-        if (!wasWalking && input.magnitude > 0.1f)
+        // Calculate the potential next position
+        Vector3 nextPosition = transform.position + (input * playerSpeed + velocity) * Time.deltaTime;
+
+        // Check if the next position is not on the sea terrain
+        RaycastHit hit;
+        if (Physics.Raycast(nextPosition + Vector3.up * 0.1f, Vector3.down, out hit))
         {
-            wasWalking = true;
-            animator.SetBool("isWalking", true);
-        }
-        else if (wasWalking && input.magnitude <= 0.1f)
-        {
-            wasWalking = false;
-            animator.SetBool("isWalking", false);
+            // Move the character
+            controller.Move((input * playerSpeed + velocity) * Time.deltaTime);
+
+            if (!wasWalking && input.magnitude > 0.1f)
+            {
+                wasWalking = true;
+                animator.SetBool("isWalking", true);
+            }
+            else if (wasWalking && input.magnitude <= 0.1f)
+            {
+                wasWalking = false;
+                animator.SetBool("isWalking", false);
+            }
         }
     }
 
-    private void UpdateGravity()
+    void UpdateGravity()
     {
         var gravity = Physics.gravity * mass * Time.deltaTime;
         velocity.y = controller.isGrounded ? -1 : velocity.y + gravity.y;
 
-        // Reset vertical velocity if character is on the ground
-        if (controller.isGrounded && velocity.y < 0f)
+        // Prevent falling through gaps by adjusting vertical position
+        if (!controller.isGrounded && velocity.y < 0f)
         {
-            velocity.y = -1f;
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit groundHit, 1.2f))
+            {
+                if (groundHit.collider.gameObject.layer != LayerMask.NameToLayer("Sea"))
+                {
+                    transform.position = new Vector3(transform.position.x, groundHit.point.y, transform.position.z);
+                }
+            }
         }
     }
 

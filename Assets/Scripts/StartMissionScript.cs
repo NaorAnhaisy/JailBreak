@@ -17,12 +17,30 @@ public class StartMissionScript : MonoBehaviour
 
     public void PlayLevel()
     {
-        LifeBarManager.Instance.gameObject.SetActive(false); // Temporarily deactivate the LifeBarManager
-        if (!(nextSceneNumber == 0 || nextSceneNumber == 2 || nextSceneNumber == 4 || nextSceneNumber == 6))
+        LifeBarManager.Instance?.gameObject.SetActive(false); // Temporarily deactivate the LifeBarManager
+
+        if (nextSceneNumber == 2 || nextSceneNumber == 4 || nextSceneNumber == 6)
         {
             LifeBarManager.Instance.gameObject.SetActive(true);
         }
-        SceneManager.LoadScene(nextSceneNumber);
+
+        if (nextSceneNumber == -1)
+        {
+            if (PlayerPrefs.HasKey("LastFailedScene"))
+            {
+                LifeBarManager.Instance.ResetLife();
+                int previousSceneNumber = PlayerPrefs.GetInt("LastFailedScene");
+                if (previousSceneNumber == 2 || previousSceneNumber == 4 || previousSceneNumber == 6)
+                {
+                    LifeBarManager.Instance.gameObject.SetActive(true);
+                }
+                SceneManager.LoadScene(previousSceneNumber);
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene(nextSceneNumber);
+        }
     }
 
     public void LoadNextScene()
