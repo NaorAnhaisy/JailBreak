@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CharacterMovement : MonoBehaviour
 {
     private LifeBarManager lifeBarManagerInstance;
+    private GunManager gunManager;
     CharacterController controller;
     public Animator animator;
     public Transform camera1Transform;
@@ -30,12 +33,19 @@ public class CharacterMovement : MonoBehaviour
     public bool hasCollectedKeys = false;
     public float delayBeforeSceneLoad = 1f;
 
+    private GameObject gun;
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Key"))
         {
             CollectKey(other.gameObject);
+        }
+
+        if (other.CompareTag("Rifle") || other.CompareTag("Pistol"))
+        {
+            CollectGun(other.gameObject);
         }
 
         if (other.CompareTag("Mine"))
@@ -47,14 +57,14 @@ public class CharacterMovement : MonoBehaviour
             // Play the destroy sound
             AudioSource.PlayClipAtPoint(mineSound, transform.position);
 
-            // update life
-            lifeBarManagerInstance.UpdateLife(-50);
-
             // Trigger explosion
             TriggerExplosion(explosionIntensity);
 
             // Destroy the mine GameObject
             Destroy(other.gameObject);
+
+            // update life
+            lifeBarManagerInstance.UpdateLife(-50);
         }
     }
 
@@ -89,6 +99,13 @@ public class CharacterMovement : MonoBehaviour
 
         // Start a coroutine to delay before loading the scene
         StartCoroutine(LoadSceneWithDelay());
+    }
+
+    private void CollectGun(GameObject gun)
+    {
+        AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
+        gunManager = GunManager.Instance;
+        gunManager.GunGameObject = gun;
     }
 
     private System.Collections.IEnumerator LoadSceneWithDelay()
