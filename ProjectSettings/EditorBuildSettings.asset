@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/GameMission2.unity
     guid: d2a4e835018d59d4b92c0974af0e5916
   - enabled: 1
-    path: Assets/Scenes/StartMission3.unity
+    path: Assets/Scenes/StartMission3 old.unity
     guid: 808c3c6d3965e1f4fac45d53b237cf54
   - enabled: 1
     path: Assets/Scenes/GameMission3.unity

@@ -28480,7 +28480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb0645bd158b2e4ca6a3106fe4910a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPrisoner: 0
+  isPrisoner: 1
   speed: 5
   waitTime: 0.3
   turnSpeed: 90
@@ -29531,7 +29531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb0645bd158b2e4ca6a3106fe4910a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPrisoner: 0
+  isPrisoner: 1
   speed: 5
   waitTime: 0.3
   turnSpeed: 90
@@ -32181,7 +32181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb0645bd158b2e4ca6a3106fe4910a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPrisoner: 0
+  isPrisoner: 1
   speed: 5
   waitTime: 0.3
   turnSpeed: 90
