@@ -54,7 +54,7 @@ public class LifeBarManager : MonoBehaviour
             LifeBarManager.Instance.gameObject.SetActive(false);
 
             // Load failed scene
-            SceneManager.LoadScene(6);
+            SceneManager.LoadScene(7);
         }
     }
 

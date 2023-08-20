@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start: {fileID: 356708031}
-  nextSceneNumber: 2
+  nextSceneNumber: 1
 --- !u!1 &356708029
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,7 +271,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 356708029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -280,7 +280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 986, y: -247}
+  m_AnchoredPosition: {x: 877, y: -230.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &356708031
@@ -372,7 +372,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Start
+  m_Text: Lets Play !
 --- !u!222 &356708033
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -418,7 +418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 27, y: 250}
+  m_AnchoredPosition: {x: 469, y: 250}
   m_SizeDelta: {x: 269.9623, y: -338.3406}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &431916532
@@ -484,7 +484,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: JailBreak
+  m_Text: Itamar Cohen and Naor Anhaisy presents...
 --- !u!222 &431916535
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -623,7 +623,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 82.9, y: -26}
+  m_AnchoredPosition: {x: 82.9, y: -37}
   m_SizeDelta: {x: 959.2, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &948340368
@@ -715,12 +715,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: All the prisoners go for a lunch break to the prison yard. Brian realizes
-    that this is his only chance to get the keys that the other prisoners stole from
-    the guards. Brian knows that the key is somewhere between the walls of the yard,
-    but does'nt know where they have hidden it. Brian has only 2 minutes to find
-    the key, while he must avoid getting close to other prisoners or the gurad who
-    is in the compound
+  m_Text: 'Brian is innocent person who got cought by the police to the most secure
+    prison in the world.
+
+    Help him get escape out of it !'
 --- !u!222 &948340370
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -961,7 +959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8784314, g: 0.9372549, b: 0.07058824, a: 1}
+  m_Color: {r: 0.9339623, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -970,18 +968,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 5e63515167650a541b309ba3bfd4db3d, type: 3}
-    m_FontSize: 100
+    m_FontSize: 140
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 100
+    m_MaxSize: 150
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Your mission is...
+  m_Text: Jail Break
 --- !u!222 &1645551950
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1007,7 +1005,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 370, y: 162}
+  m_AnchoredPosition: {x: 526, y: 130}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &1758575485
@@ -1046,8 +1044,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 231, y: -194.9}
-  m_SizeDelta: {x: 679.9, y: 30}
+  m_AnchoredPosition: {x: 162, y: -161}
+  m_SizeDelta: {x: 790, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1758575487
 MonoBehaviour:
@@ -1127,7 +1125,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 5e63515167650a541b309ba3bfd4db3d, type: 3}
-    m_FontSize: 35
+    m_FontSize: 32
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -1138,7 +1136,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '*Every hit by a policeman will reduce him 30HP, hit by a prisoner 20HP*'
+  m_Text: The game consists of 3 parts, and each of them starts with the instructions
+    for the specific misssion.
 --- !u!222 &1758575489
 CanvasRenderer:
   m_ObjectHideFlags: 0

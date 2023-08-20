@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/WelcomePage.unity
+    guid: 3577be0ba30c1d54d87c48a010a60e85
+  - enabled: 1
     path: Assets/Scenes/StartMission1.unity
     guid: 369a46b039e4f164fbd1a7fc9b5d1ea7
   - enabled: 1
@@ -16,13 +19,13 @@ EditorBuildSettings:
     guid: ba8e3e22d7ba3124aa48612948044c29
   - enabled: 1
     path: Assets/Scenes/GameMission2.unity
-    guid: d2a4e835018d59d4b92c0974af0e5916
+    guid: c96500b2cccd454418a072a90659dd35
   - enabled: 1
-    path: Assets/Scenes/StartMission3 old.unity
-    guid: 808c3c6d3965e1f4fac45d53b237cf54
+    path: Assets/Scenes/StartMission3.unity
+    guid: 5ade33e7a70c35248b23ddb69e22c0df
   - enabled: 1
     path: Assets/Scenes/GameMission3.unity
-    guid: ffa1f9ee396b6d543a469b5be223be64
+    guid: a40e8120e2aacef4f80c67c444cf5ba6
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 6cccd496e8939ca449c11856305b47d6
