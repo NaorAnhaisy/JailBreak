@@ -17,8 +17,8 @@ public class TimerScript : MonoBehaviour
 
     private void Start()
     {
-        // Check if the current scene is Scene 1
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        // Check if the current scene is Scene 2
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             // Activate the TimerScript and associated game object
             gameObject.SetActive(true);

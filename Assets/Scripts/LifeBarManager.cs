@@ -10,7 +10,6 @@ public class LifeBarManager : MonoBehaviour
     {
         get
         {
-            Debug.Log("Here!!");
             if (instance == null)
             {
                 instance = FindObjectOfType<LifeBarManager>();
@@ -33,7 +32,6 @@ public class LifeBarManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("ehre!!");
         UpdateLife(0); // Initialize the life bar color
     }
 
