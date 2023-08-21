@@ -239,7 +239,7 @@ public class CharacterMovement : MonoBehaviour
 
     void UpdateGravity()
     {
-        var gravity = Physics.gravity * mass * Time.deltaTime;
+        var gravity = Physics.gravity * mass * Time.deltaTime * 10;
         velocity.y = controller.isGrounded ? -1 : velocity.y + gravity.y;
 
         // Prevent falling through gaps by adjusting vertical position
