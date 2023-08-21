@@ -24,16 +24,6 @@ public class GunManager : MonoBehaviour
 
     public static string selectedGun = "";
 
-    private void Start()
-    {
-       // UpdateSelectedGun(null); // Initialize the life bar color
-    }
-
-   // public void UpdateSelectedGun(GameObject newSelectedGun)
-   // {
-  ////      GunManager.selectedGun = newSelectedGun;
- //   }
-
     private void Awake()
     {
         if (instance == null)

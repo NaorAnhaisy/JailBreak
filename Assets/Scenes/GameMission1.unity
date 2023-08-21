@@ -52992,8 +52992,8 @@ MonoBehaviour:
   animator: {fileID: 1900556017}
   camera1Transform: {fileID: 963194228}
   camera2Transform: {fileID: 365450978}
-  playerWalkSpeed: 5
-  playerRunSpeed: 10
+  playerWalkSpeed: 10
+  playerRunSpeed: 20
   explosionPrefab: {fileID: 0}
   explosionIntensityMultiplier: 1.5
   mouseSensivity: 3

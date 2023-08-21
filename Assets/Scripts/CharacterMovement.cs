@@ -49,7 +49,6 @@ public class CharacterMovement : MonoBehaviour
 
         if (other.CompareTag("Boat"))
         {
-            Debug.Log("Found the boat");
             AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
             Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene(8);
@@ -58,9 +57,7 @@ public class CharacterMovement : MonoBehaviour
         if (other.CompareTag("Rifle") || other.CompareTag("Pistol"))
         {
             AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
-            //gunManagerInstance.UpdateSelectedGun(other.gameObject); // Store the selected gun
             GunManager.selectedGun = other.tag;
-            Debug.Log("Selected gun: " + GunManager.selectedGun);
             Cursor.lockState = CursorLockMode.None;
 
             // Mark GunManager as not destroyable during scene change
@@ -171,8 +168,6 @@ public class CharacterMovement : MonoBehaviour
 
         if (GunManager.selectedGun != "")
         {
-            Debug.Log("Retrieved selected gun: " + GunManager.selectedGun);
-
             if (GunManager.selectedGun == "Rifle")
             {
                 rifle.SetActive(true);
@@ -183,10 +178,6 @@ public class CharacterMovement : MonoBehaviour
                 pistol.SetActive(true);
                 rifle.SetActive(false);
             }
-        }
-        else
-        {
-            Debug.Log("No selected gun found " + GunManager.selectedGun);
         }
     }
 
