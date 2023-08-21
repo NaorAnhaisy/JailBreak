@@ -9,6 +9,8 @@ TagManager:
   - Mine
   - Pistol
   - Rifle
+  - FirstAid
+  - Boat
   layers:
   - Default
   - TransparentFX

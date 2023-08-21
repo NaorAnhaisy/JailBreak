@@ -1,68 +1,50 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GunManager : MonoBehaviour
 {
-    // Static reference to the instance
-    private static GunManager _instance;
+    private static GunManager instance;
 
-    // Public property to access the instance
     public static GunManager Instance
     {
         get
         {
-            // If the instance doesn't exist, try to find it in the scene
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = FindObjectOfType<GunManager>();
-
-                // If it's still null, create a new GameObject to host the Singleton script
-                if (_instance == null)
+                instance = FindObjectOfType<GunManager>();
+                if (instance == null)
                 {
-                    GameObject singletonObject = new GameObject("GunManager");
-                    _instance = singletonObject.AddComponent<GunManager>();
+                    GameObject obj = new GameObject("GunManager");
+                    instance = obj.AddComponent<GunManager>();
                 }
             }
-            return _instance;
+            return instance;
         }
-        set { _instance = value; }
     }
 
-    // The gameObject that belongs to the Singleton instance
-    private GameObject gunGameObject;
+    public GameObject selectedGun = null;
 
-    // Public property to access and modify the gameObject
-    public GameObject GunGameObject
+    private void Start()
     {
-        get { return gunGameObject; }
-        set { Debug.Log("Gun game object setted to " + value);  gunGameObject = value; }
+        UpdateSelectedGun(null); // Initialize the life bar color
     }
 
-    // Ensure the Singleton instance isn't destroyed on scene changes
+    public void UpdateSelectedGun(GameObject newSelectedGun)
+    {
+        this.selectedGun = newSelectedGun;
+    }
+
     private void Awake()
     {
-        if (_instance == null)
+        if (instance == null)
         {
-            _instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Debug.Log("Gun game object destroyed");
             Destroy(gameObject);
         }
     }
 
-    // Example method to use the Singleton instance
-    public void DoSomethingWithGameObject()
-    {
-        if (gunGameObject != null)
-        {
-            // Perform actions on myGameObject
-            Debug.Log("Doing something with the gameObject!");
-        }
-        else
-        {
-            Debug.Log("No gameObject assigned.");
-        }
-    }
 }

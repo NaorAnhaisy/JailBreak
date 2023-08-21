@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEngine.ParticleSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
     private LifeBarManager lifeBarManagerInstance;
-    private GunManager gunManager;
+    private GunManager gunManagerInstance;
     CharacterController controller;
     public Animator animator;
     public Transform camera1Transform;
@@ -44,9 +40,33 @@ public class CharacterMovement : MonoBehaviour
             CollectKey(other.gameObject);
         }
 
+        if (other.CompareTag("FirstAid"))
+        {
+            AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
+            lifeBarManagerInstance.UpdateLife(20);
+            other.gameObject.SetActive(false);
+            Destroy(other);
+        }
+
+        if (other.CompareTag("Boat"))
+        {
+            Debug.Log("Found the boat");
+            AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene(8);
+        }
+
         if (other.CompareTag("Rifle") || other.CompareTag("Pistol"))
         {
-            CollectGun(other.gameObject);
+            AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
+            gunManagerInstance.UpdateSelectedGun(other.gameObject); // Store the selected gun
+            Debug.Log("Selected gun: " + gunManagerInstance.selectedGun.tag);
+            Cursor.lockState = CursorLockMode.None;
+
+            // Mark GunManager as not destroyable during scene change
+            DontDestroyOnLoad(GunManager.Instance);
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         if (other.CompareTag("Mine"))
@@ -102,15 +122,6 @@ public class CharacterMovement : MonoBehaviour
         StartCoroutine(LoadSceneWithDelay());
     }
 
-    private void CollectGun(GameObject gun)
-    {
-        AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
-        Debug.Log(gun);
-        gunManager.GunGameObject = gun;
-        Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene(5);
-    }
-
     private System.Collections.IEnumerator LoadSceneWithDelay()
     {
         // Wait for the specified delay
@@ -130,7 +141,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
-        gunManager = GunManager.Instance;
+        gunManagerInstance = GunManager.Instance;
         lifeBarManagerInstance = LifeBarManager.Instance;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -158,18 +169,24 @@ public class CharacterMovement : MonoBehaviour
         UpdateGravity();
         UpdateActiveCamera();
 
-        if (gunManager.GunGameObject)
+        if (gunManagerInstance.selectedGun != null)
         {
-            Debug.Log("gunManager.GunGameObject.tag:");
-            Debug.Log(gunManager.GunGameObject.tag);
-            if (gunManager.GunGameObject.tag == "Rifle")
+            Debug.Log("Retrieved selected gun: " + gunManagerInstance.selectedGun.tag);
+
+            if (gunManagerInstance.selectedGun.CompareTag("Rifle"))
             {
-                rifle.gameObject.SetActive(true);
+                rifle.SetActive(true);
+                pistol.SetActive(false);
             }
-            else if (gunManager.GunGameObject.tag == "Pistol")
+            else if (gunManagerInstance.selectedGun.CompareTag("Pistol"))
             {
-                pistol.gameObject.SetActive(true);
+                pistol.SetActive(true);
+                rifle.SetActive(false);
             }
+        }
+        else
+        {
+            Debug.Log("No selected gun found");
         }
     }
 
