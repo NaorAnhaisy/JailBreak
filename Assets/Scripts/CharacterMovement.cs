@@ -5,7 +5,6 @@ using static UnityEngine.ParticleSystem;
 public class CharacterMovement : MonoBehaviour
 {
     private LifeBarManager lifeBarManagerInstance;
-    private GunManager gunManagerInstance;
     CharacterController controller;
     public Animator animator;
     public Transform camera1Transform;
@@ -33,7 +32,6 @@ public class CharacterMovement : MonoBehaviour
     public GameObject rifle;
     public GameObject pistol;
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Key"))
@@ -60,8 +58,9 @@ public class CharacterMovement : MonoBehaviour
         if (other.CompareTag("Rifle") || other.CompareTag("Pistol"))
         {
             AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
-            gunManagerInstance.UpdateSelectedGun(other.gameObject); // Store the selected gun
-            Debug.Log("Selected gun: " + gunManagerInstance.selectedGun.tag);
+            //gunManagerInstance.UpdateSelectedGun(other.gameObject); // Store the selected gun
+            GunManager.selectedGun = other.tag;
+            Debug.Log("Selected gun: " + GunManager.selectedGun);
             Cursor.lockState = CursorLockMode.None;
 
             // Mark GunManager as not destroyable during scene change
@@ -142,7 +141,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
-        gunManagerInstance = GunManager.Instance;
+
         lifeBarManagerInstance = LifeBarManager.Instance;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -170,16 +169,16 @@ public class CharacterMovement : MonoBehaviour
         UpdateGravity();
         UpdateActiveCamera();
 
-        if (gunManagerInstance.selectedGun != null)
+        if (GunManager.selectedGun != "")
         {
-            Debug.Log("Retrieved selected gun: " + gunManagerInstance.selectedGun.tag);
+            Debug.Log("Retrieved selected gun: " + GunManager.selectedGun);
 
-            if (gunManagerInstance.selectedGun.CompareTag("Rifle"))
+            if (GunManager.selectedGun == "Rifle")
             {
                 rifle.SetActive(true);
                 pistol.SetActive(false);
             }
-            else if (gunManagerInstance.selectedGun.CompareTag("Pistol"))
+            else if (GunManager.selectedGun == "Pistol")
             {
                 pistol.SetActive(true);
                 rifle.SetActive(false);
@@ -187,7 +186,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            // Debug.Log("No selected gun found");
+            Debug.Log("No selected gun found " + GunManager.selectedGun);
         }
     }
 

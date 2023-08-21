@@ -22,17 +22,17 @@ public class GunManager : MonoBehaviour
         }
     }
 
-    public GameObject selectedGun = null;
+    public static string selectedGun = "";
 
     private void Start()
     {
-        UpdateSelectedGun(null); // Initialize the life bar color
+       // UpdateSelectedGun(null); // Initialize the life bar color
     }
 
-    public void UpdateSelectedGun(GameObject newSelectedGun)
-    {
-        this.selectedGun = newSelectedGun;
-    }
+   // public void UpdateSelectedGun(GameObject newSelectedGun)
+   // {
+  ////      GunManager.selectedGun = newSelectedGun;
+ //   }
 
     private void Awake()
     {
