@@ -11,7 +11,8 @@ public class CharacterMovement : MonoBehaviour
     public Transform camera1Transform;
     public Transform camera2Transform;
     private Transform activeCameraTransform;
-    public float playerSpeed = 5;
+    public float playerWalkSpeed = 10;
+    public float playerRunSpeed = 20;
 
     public GameObject explosionPrefab;
     public float explosionIntensityMultiplier = 1.5f;
@@ -186,7 +187,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("No selected gun found");
+            // Debug.Log("No selected gun found");
         }
     }
 
@@ -213,16 +214,23 @@ public class CharacterMovement : MonoBehaviour
             velocity.y += jumpSpeed;
         }
 
+        // Check if the shift key is pressed to determine if the player is running
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+
+        // Adjust player speed based on whether they are running or not
+        float currentSpeed = isRunning ? playerRunSpeed : playerWalkSpeed;
+
         // Calculate the potential next position
-        Vector3 nextPosition = transform.position + (input * playerSpeed + velocity) * Time.deltaTime;
+        Vector3 nextPosition = transform.position + (input * currentSpeed + velocity) * Time.deltaTime;
 
         // Check if the next position is not on the sea terrain
         RaycastHit hit;
         if (Physics.Raycast(nextPosition + Vector3.up * 0.1f, Vector3.down, out hit))
         {
             // Move the character
-            controller.Move((input * playerSpeed + velocity) * Time.deltaTime);
+            controller.Move((input * currentSpeed + velocity) * Time.deltaTime);
 
+            // Update the animator parameters based on movement
             if (!wasWalking && input.magnitude > 0.1f)
             {
                 wasWalking = true;
@@ -233,6 +241,9 @@ public class CharacterMovement : MonoBehaviour
                 wasWalking = false;
                 animator.SetBool("isWalking", false);
             }
+
+            // Update the animator parameter for running
+            animator.SetBool("isRunning", isRunning);
         }
     }
 

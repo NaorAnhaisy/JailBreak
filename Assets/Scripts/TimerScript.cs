@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
 {
-    public float totalTime = 120f; // Total time in seconds
+    public float totalTime = 180f; // Total time in seconds
 
     public Text timerText;
     public Image fillImage;
