@@ -33,7 +33,8 @@ public class CharacterMovement : MonoBehaviour
     public bool hasCollectedKeys = false;
     public float delayBeforeSceneLoad = 1f;
 
-    private GameObject gun;
+    public GameObject rifle;
+    public GameObject pistol;
 
 
     private void OnTriggerEnter(Collider other)
@@ -104,8 +105,10 @@ public class CharacterMovement : MonoBehaviour
     private void CollectGun(GameObject gun)
     {
         AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
-        gunManager = GunManager.Instance;
+        Debug.Log(gun);
         gunManager.GunGameObject = gun;
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene(5);
     }
 
     private System.Collections.IEnumerator LoadSceneWithDelay()
@@ -127,6 +130,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
+        gunManager = GunManager.Instance;
         lifeBarManagerInstance = LifeBarManager.Instance;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -153,6 +157,20 @@ public class CharacterMovement : MonoBehaviour
         UpdateMovement();
         UpdateGravity();
         UpdateActiveCamera();
+
+        if (gunManager.GunGameObject)
+        {
+            Debug.Log("gunManager.GunGameObject.tag:");
+            Debug.Log(gunManager.GunGameObject.tag);
+            if (gunManager.GunGameObject.tag == "Rifle")
+            {
+                rifle.gameObject.SetActive(true);
+            }
+            else if (gunManager.GunGameObject.tag == "Pistol")
+            {
+                pistol.gameObject.SetActive(true);
+            }
+        }
     }
 
     void UpdateLook()

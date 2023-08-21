@@ -34,7 +34,7 @@ public class GunManager : MonoBehaviour
     public GameObject GunGameObject
     {
         get { return gunGameObject; }
-        set { gunGameObject = value; }
+        set { Debug.Log("Gun game object setted to " + value);  gunGameObject = value; }
     }
 
     // Ensure the Singleton instance isn't destroyed on scene changes
@@ -47,6 +47,7 @@ public class GunManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Gun game object destroyed");
             Destroy(gameObject);
         }
     }
