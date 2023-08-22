@@ -60,6 +60,9 @@ public class CharacterMovement : MonoBehaviour
             GunManager.selectedGun = other.tag;
             Cursor.lockState = CursorLockMode.None;
 
+            // hide life bar
+            LifeBarManager.Instance.gameObject.SetActive(false);
+
             // Mark GunManager as not destroyable during scene change
             DontDestroyOnLoad(GunManager.Instance);
 

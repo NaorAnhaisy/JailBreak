@@ -24,9 +24,11 @@ public class Gurad : MonoBehaviour
     private bool canRemovePoints = true; // Flag to track whether the guard can remove points
     private bool canRemoveAdditionalPoints = false; // Flag to track if additional points can be removed
 
-    public Transform pathHolder;
     Transform player;
     Color originalSpotlightColor;
+
+#nullable enable
+    public Transform? pathHolder;
 
     void Start()
     {
@@ -35,14 +37,17 @@ public class Gurad : MonoBehaviour
         viewAngle = spotlight.spotAngle;
         originalSpotlightColor = spotlight.color;
 
-        Vector3[] waypoints = new Vector3[pathHolder.childCount];
-        for (int i = 0; i < waypoints.Length; i++)
+        if (pathHolder is not null)
         {
-            waypoints[i] = pathHolder.GetChild(i).position;
-            waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
-        }
+            Vector3[] waypoints = new Vector3[pathHolder.childCount];
+            for (int i = 0; i < waypoints.Length; i++)
+            {
+                waypoints[i] = pathHolder.GetChild(i).position;
+                waypoints[i] = new Vector3(waypoints[i].x, transform.position.y, waypoints[i].z);
+            }
 
-        StartCoroutine(FollowPath(waypoints));
+            StartCoroutine(FollowPath(waypoints));
+        }
     }
 
     void Update()

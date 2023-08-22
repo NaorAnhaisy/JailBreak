@@ -11,6 +11,7 @@ TagManager:
   - Rifle
   - FirstAid
   - Boat
+  - Bear
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Sea
   - Sand
   - Gun
-  - 
+  - Bear
   - 
   - 
   - 

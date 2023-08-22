@@ -39,11 +39,15 @@ public class LifeBarManager : MonoBehaviour
     {
         life += amount;
         life = Mathf.Clamp(life, 0, 100);
-        fillImage.fillAmount = life / 100f;
-        lifeText.text = life.ToString() + "/100";
 
-        // Change the color based on remaining life
-        fillImage.color = Color.Lerp(emptyColor, fullColor, life / 100f);
+        if (fillImage is not null)
+        {
+            fillImage.fillAmount = life / 100f;
+            lifeText.text = life.ToString() + "/100";
+
+            // Change the color based on remaining life
+            fillImage.color = Color.Lerp(emptyColor, fullColor, life / 100f);
+        }
 
         if (life == 0)
         {
@@ -51,7 +55,7 @@ public class LifeBarManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
 
             // hide life bar
-            LifeBarManager.Instance.gameObject.SetActive(false);
+            Instance.gameObject.SetActive(false);
 
             // Save the current scene number
             int currentSceneNumber = SceneManager.GetActiveScene().buildIndex;
