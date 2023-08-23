@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float maxDistance = 100f;
+    public float bulletSpeed = 100f; // Speed of the bullet.
     private Vector3 initialPosition;
 
     private void Start()
