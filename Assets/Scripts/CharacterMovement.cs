@@ -111,8 +111,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void TriggerExplosion(float intensity)
     {
+        // Calculate the position in front of the player
+        Vector3 explosionPosition = transform.position + transform.forward * 5;
+
         // Instantiate the explosion prefab at the player's position
-        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        GameObject explosion = Instantiate(explosionPrefab, explosionPosition, Quaternion.identity);
 
         // Get the ParticleSystem component from the explosion object
         ParticleSystem particleSystem = explosion.GetComponent<ParticleSystem>();
