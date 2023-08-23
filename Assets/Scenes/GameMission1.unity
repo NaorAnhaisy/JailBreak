@@ -50999,10 +50999,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821939292}
-  m_Text: 'Find the keys in the given time,
-
-    While keeping distance from the
-    officer and other prisoners'
+  m_Text: Find the keys in the given time
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

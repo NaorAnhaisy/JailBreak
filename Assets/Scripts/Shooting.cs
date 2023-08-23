@@ -81,6 +81,7 @@ public class Shooting : MonoBehaviour
 
         // Instantiate and move the bullet.
         GameObject bullet = Instantiate(bulletPrefab, gunEnd.position, Quaternion.identity);
+        bullet.tag = "Bullet";
         bullet.transform.rotation = gunEnd.rotation;
 
         // Get the Bullet script component and set its bulletSpeed value.

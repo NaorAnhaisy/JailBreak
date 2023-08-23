@@ -12,6 +12,8 @@ TagManager:
   - FirstAid
   - Boat
   - Bear
+  - Damageable
+  - Bullet
   layers:
   - Default
   - TransparentFX

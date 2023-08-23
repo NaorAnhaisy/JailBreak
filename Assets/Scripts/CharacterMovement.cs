@@ -42,7 +42,7 @@ public class CharacterMovement : MonoBehaviour
         if (other.CompareTag("FirstAid"))
         {
             AudioSource.PlayClipAtPoint(keyCollectSound, transform.position);
-            lifeBarManagerInstance.UpdateLife(20);
+            lifeBarManagerInstance.UpdateLife(30);
             other.gameObject.SetActive(false);
             Destroy(other);
         }
@@ -71,24 +71,28 @@ public class CharacterMovement : MonoBehaviour
 
         if (other.CompareTag("Mine"))
         {
+            // update life
+            lifeBarManagerInstance.UpdateLife(-50);
+            Debug.Log("After Update life");
 
             // Calculate explosion intensity based on the noise value
             float explosionIntensity = 0.5f * explosionIntensityMultiplier;
-
-            // Play the destroy sound
-            AudioSource.PlayClipAtPoint(mineSound, transform.position);
+            Debug.Log("After calc explosionIntensity");
 
             // Trigger explosion
             TriggerExplosion(explosionIntensity);
+            Debug.Log("After TriggerExplosion");
+
+            // Play the destroy sound
+            AudioSource.PlayClipAtPoint(mineSound, transform.position);
+            Debug.Log("After Audio");
 
             // Destroy the mine GameObject
-            Destroy(other.gameObject);
-
-            // update life
-            lifeBarManagerInstance.UpdateLife(-50);
+            Destroy(other);
+            Debug.Log("After Destroy");
         }
     }
-
+    /*
     private void TriggerExplosion(float intensity)
     {
         // Instantiate the explosion prefab at the player's position
@@ -102,6 +106,33 @@ public class CharacterMovement : MonoBehaviour
 
         // Destroy the explosion effect after its duration
         Destroy(explosion, mainModule.duration);
+    }
+    */
+
+    private void TriggerExplosion(float intensity)
+    {
+        // Instantiate the explosion prefab at the player's position
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        // Get the ParticleSystem component from the explosion object
+        ParticleSystem particleSystem = explosion.GetComponent<ParticleSystem>();
+
+        if (particleSystem != null)
+        {
+            // Get the main module of the ParticleSystem
+            ParticleSystem.MainModule mainModule = particleSystem.main;
+
+            // Modify the startSizeMultiplier and startSpeedMultiplier properties
+            mainModule.startSizeMultiplier *= intensity;
+            mainModule.startSpeedMultiplier *= intensity;
+
+            // Destroy the explosion effect after its duration
+            Destroy(explosion, mainModule.duration);
+        }
+        else
+        {
+            Debug.LogError("Particle system not found in explosion prefab.");
+        }
     }
 
     private void CollectKey(GameObject key)
